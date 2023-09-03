@@ -27,6 +27,8 @@ public class Files {
 	
 	private String type;
 	
+	private String path;
+	
 	@Lob
 	private byte[] imageData;
 }
