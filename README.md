@@ -1,2 +1,2 @@
 # upload-file
-It will store images into database and fetch data from database
+It will read data from CSV file and store into database

@@ -9,13 +9,13 @@
 		<version>3.1.2</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	
+
 	<groupId>com.jts</groupId>
 	<artifactId>upload-file</artifactId>
 	<version>1.0.0</version>
 	<name>upload-service</name>
 	<description>Demo project for Spring Boot</description>
-	
+
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -35,10 +35,15 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>5.7.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>

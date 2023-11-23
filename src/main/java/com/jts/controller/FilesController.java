@@ -4,51 +4,28 @@ import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.jts.service.FilesService;
+import com.jts.service.FileService;
+import com.opencsv.exceptions.CsvException;
 
 @RestController
 @RequestMapping("/api")
 public class FilesController {
-	
+
 	@Autowired
-	private FilesService filesService;
-	
+	private FileService fileService;
+
 	@PostMapping("/uploadFilesIntoDB")
-	public ResponseEntity<String> storeFilesIntoDB(@RequestParam("file") MultipartFile file) throws IOException {
-		String response = filesService.storeFile(file);
+	public ResponseEntity<String> storeFilesIntoDB(@RequestParam MultipartFile file) throws IOException, CsvException {
+		fileService.save(file);
 		
-		return ResponseEntity.status(HttpStatus.OK).body(response);
-	}
-	
-	@GetMapping("/getFileByName/{fileName}")
-	public ResponseEntity<byte[]> getImage(@PathVariable String fileName) {
-		byte[] imageData = filesService.getFiles(fileName);
-		
-		return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("image/png")).body(imageData);
-	}
-	
-	@PostMapping("/uploadFilesIntoFileSystem")
-	public ResponseEntity<String> uploadFileIntoFileSystem(@RequestParam("file") MultipartFile file) throws IOException {
-		String response = filesService.storeDataIntoFileSystem(file);
-		
-		return ResponseEntity.status(HttpStatus.OK).body(response);
-	}
-	
-	@GetMapping("/getFilesFromFileSystem/{fileName}")
-	public ResponseEntity<byte[]> downloadImageFromFileSystem(@PathVariable String fileName) {
-		byte[] imageData = filesService.getFiles(fileName);
-		
-		return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("image/png")).body(imageData);
+		return ResponseEntity.status(HttpStatus.OK).body("Success");
 	}
 
 }
